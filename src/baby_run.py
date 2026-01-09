@@ -105,7 +105,7 @@ class BabyRunner:
                             if delta:
                                 full_text += delta
                                 print(f"{color}{delta}{reset}", end="", flush=True)
-                                await asyncio.sleep(0.01)
+                                await asyncio.sleep(0.05)
                         except Exception:
                             continue
         
