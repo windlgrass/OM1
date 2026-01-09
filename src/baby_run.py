@@ -120,9 +120,7 @@ class BabyRunner:
         """Execute one teaching turn"""
         self.turn_count += 1
         
-        print(f"\n{'='*60}")
-        print(f"Turn {self.turn_count}")
-        print(f"{'='*60}\n")
+      print(f"\n{'='*60}\n")
         
         try:
             # Assistant teaches
