@@ -180,7 +180,8 @@ def validate_config(
     - API key configuration (warning only)
     - Component existence (with --check-components flag)
 
-    Examples:
+    Examples
+    --------
         uv run src/cli.py validate-config test
         uv run src/cli.py validate-config config/my_robot.json5
         uv run src/cli.py validate-config test --verbose
@@ -197,8 +198,13 @@ def validate_config(
             print("-" * 50)
 
         # Load and parse JSON5
-        with open(config_path, "r") as f:
-            raw_config = json5.load(f)
+        try:
+            with open(config_path, "r") as f:
+                raw_config = json5.load(f)
+        except ValueError as e:
+            print("Error: Invalid JSON5 syntax")
+            print(f"   {e}")
+            raise typer.Exit(1)
 
         if verbose:
             print("JSON5 syntax valid")
@@ -258,10 +264,7 @@ def validate_config(
         raise typer.Exit(1)
 
     except ValueError as e:
-        if "line" in str(e).lower() or "parse" in str(e).lower():
-            print("Error: Invalid JSON5 syntax")
-            print(f"   {e}")
-        elif "Component validation" in str(e):
+        if "Component validation" in str(e):
             pass  # Already printed by _validate_components
         else:
             print("Error: Unexpected validation error")
