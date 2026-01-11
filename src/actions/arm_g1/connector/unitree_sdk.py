@@ -1,3 +1,4 @@
+import asyncio
 import logging
 
 from actions.arm_g1.interface import ArmInput
@@ -65,4 +66,26 @@ class ARMUnitreeSDKConnector(ActionConnector[ActionConfig, ArmInput]):
             return
 
         logging.info(f"Executing action with ID: {action_id}")
-        self.client.ExecuteAction(action_id)
+        
+        try:
+            loop = asyncio.get_event_loop()
+            await asyncio.wait_for(
+                loop.run_in_executor(None, self.client.ExecuteAction, action_id),
+                timeout=10.0
+            )
+            logging.info(f"Action {action_id} completed successfully")
+        except asyncio.TimeoutError:
+            logging.error(
+                f"Action {action_id} timed out after 10s - robot may be stuck!",
+                exc_info=True
+            )
+        except ConnectionError as e:
+            logging.error(
+                f"Connection lost to robot while executing action {action_id}: {e}",
+                exc_info=True
+            )
+        except Exception as e:
+            logging.error(
+                f"Failed to execute action {action_id}: {e}",
+                exc_info=True
+            )
