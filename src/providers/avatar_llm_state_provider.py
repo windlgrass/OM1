@@ -158,7 +158,7 @@ class AvatarLLMState:
 
                 except Exception as e:
                     instance._restore_happy()
-                    raise e
+                    raise
 
             return wrapper
 
