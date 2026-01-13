@@ -107,13 +107,12 @@ class AvatarProvider:
 
         try:
             request_id = str(uuid4())
-            face_text = command
 
             face_msg = AvatarFaceRequest(
                 header=prepare_header(request_id),
                 request_id=String(request_id),
                 code=AvatarFaceRequest.Code.SWITCH_FACE.value,
-                face_text=String(face_text),
+                face_text=String(command),
             )
             self.avatar_publisher.put(face_msg.serialize())
             logging.info(f"AvatarProvider sent command to Zenoh: {face_text}")
