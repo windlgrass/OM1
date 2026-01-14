@@ -15,12 +15,10 @@ class AvatarLLMState:
     """
 
     _instance = None
-    _lock = None
+    _lock = threading.Lock()
 
     def __new__(cls):
         if cls._instance is None:
-            if cls._lock is None:
-                cls._lock = threading.Lock()
 
             with cls._lock:
                 if cls._instance is None:
