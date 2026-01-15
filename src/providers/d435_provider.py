@@ -15,6 +15,12 @@ class D435Provider:
     """
 
     def __init__(self):
+        """
+        Initialize the D435 camera provider.
+    
+        Sets up the Zenoh session and subscribes to the obstacle point cloud topic.
+        Automatically starts the provider upon initialization.
+        """
         self.obstacle = []
         self.running = False
         self.session = None
