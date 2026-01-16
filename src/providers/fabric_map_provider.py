@@ -22,7 +22,7 @@ class RFData:
         Unix timestamp of the scan.
     address : str
         Bluetooth address of the device.
-    name : str
+    name : str | None
         Name of the device.
     rssi : int
         Received Signal Strength Indicator of the device.
