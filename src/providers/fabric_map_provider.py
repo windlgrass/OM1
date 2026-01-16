@@ -26,6 +26,14 @@ class RFData:
         Name of the device.
     rssi : int
         Received Signal Strength Indicator of the device.
+    tx_power : int | None
+        Transmission power.
+    service_uuid : str
+        Service UUID.
+    mfgkey : str
+        Manufacturing key.
+    mfgval : str
+        Manufacturing value.
     """
 
     unix_ts: float
@@ -69,10 +77,10 @@ class RFDataRaw:
         Unix timestamp of the scan.
     address : str
         Bluetooth address of the device.
-    name : str
-        Name of the device.
     rssi : int
         Received Signal Strength Indicator of the device.
+    packet : str                
+        Packet data.
     """
 
     unix_ts: float
