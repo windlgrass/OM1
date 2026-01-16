@@ -20,12 +20,16 @@ class ElevenLabsTTSProvider:
         The URL endpoint for the TTS service. (Default is https://api.openmind.org/api/core/elevenlabs/tts)
     api_key : str
         The API key for the TTS service
+    elevenlabs_api_key : str, optional
+        API key for Eleven Labs service
     voice_id : str, optional
         The name of the voice for Eleven Labs TTS service (default is JBFqnCBsd6RMkjVDRZzb)
     model_id : str, optional
         The name of the model for Eleven Labs TTS service (default is eleven_multilingual
     output_format : str, optional
         The output format for the audio stream (default is mp3_44100_128)
+    enable_tts_interrupt : bool
+        If True, enables TTS interrupt when ASR detects speech
     """
 
     def __init__(
@@ -77,6 +81,8 @@ class ElevenLabsTTSProvider:
             The URL endpoint for the TTS service.
         api_key : str
             The API key for the TTS service.
+        elevenlabs_api_key : str, optional
+            API key for Eleven Labs service.
         voice_id : str, optional
             The name of the voice for Eleven Labs TTS service.
         model_id : str, optional
