@@ -203,6 +203,9 @@ class FabricDataSubmitter:
         self.executor = ThreadPoolExecutor(max_workers=1)
 
     def update_filename(self):
+        """
+        Update the filename for local logging with a timestamp.
+        """
         unix_ts = time.time()
         logging.info(f"fabric time: {unix_ts}")
         unix_ts = str(unix_ts).replace(".", "_")
@@ -214,10 +217,11 @@ class FabricDataSubmitter:
         Writes a dictionary to a file in JSON lines format. If the file exceeds max_file_size_bytes,
         creates a new file with a timestamp.
 
-        Parameters:
-        - data: Dictionary to write
+        Parameters
+        ----------
+        data : dict
+            The dictionary to write to the file.
         """
-
         if not isinstance(data, dict):
             raise ValueError("Provided data must be a dictionary.")
 
@@ -243,7 +247,6 @@ class FabricDataSubmitter:
         data : FabricData
             The data to be shared.
         """
-
         logging.info(f"_share_data_worker: {data}")
         try:
             json_dict = data.to_dict()
@@ -264,6 +267,7 @@ class FabricDataSubmitter:
                 self.base_url,
                 headers={"Authorization": f"Bearer {self.api_key}"},
                 json=json_dict,
+                timeout=10,
             )
 
             if request.status_code == 201:
