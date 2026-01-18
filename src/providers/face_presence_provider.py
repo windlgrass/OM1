@@ -87,7 +87,26 @@ class PresenceSnapshot:
 class FacePresenceProvider:
     """
     Singleton provider that polls `/who` at a fixed cadence and emits text lines.
-
+    
+    Attributes
+    ----------
+    base_url : str
+        Base HTTP URL of the face stream API.
+    recent_sec : float
+        Lookback window in seconds.
+    period : float
+        Polling period.
+    timeout_s : float
+        HTTP request timeout.
+    prefer_recent : bool
+        Use recent frames based data or current snapshot.
+    unknown_frac_threshold : float
+        Threshold for unknown face suppression.
+    unknown_min_count : int
+        Minimum count for unknown face detection.
+    min_obs_window : int
+        Minimum observation window.
+        
     Tasks
     ------------
     - Spawns one background thread that periodically POSTs to `{base_url}/who`.
@@ -121,6 +140,14 @@ class FacePresenceProvider:
             Polling rate in events per second (e.g., 5.0 → every 0.2s).
         timeout_s : float, default 2.0
             HTTP request timeout in seconds.
+        prefer_recent : bool, default True
+            Use recent frames based data or current snapshot.
+        unknown_frac_threshold : float, default 0.15
+            Threshold for unknown face suppression.
+        unknown_min_count : int, default 6
+            Minimum count for unknown face detection.
+        min_obs_window : int, default 24
+            Minimum observation window.
         """
 
         self.base_url = base_url.rstrip("/")
