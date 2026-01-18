@@ -57,7 +57,7 @@ class GeminiLLM(LLM[R]):
         self, prompt: str, messages: T.List[T.Dict[str, str]] = []
     ) -> T.Optional[R]:
         """
-        Execute LLM query and parse response
+        Execute LLM query and parse response.
 
         Parameters
         ----------
@@ -92,6 +92,10 @@ class GeminiLLM(LLM[R]):
                 tool_choice="auto",
                 timeout=self._config.timeout,
             )
+
+            if not response.choices:
+                logging.warning("Gemini API returned empty choices")
+                return None
 
             message = response.choices[0].message
             self.io_provider.llm_end_time = time.time()
