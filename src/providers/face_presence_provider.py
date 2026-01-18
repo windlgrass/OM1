@@ -1,3 +1,4 @@
+import logging
 import threading
 import time
 from dataclasses import dataclass
@@ -11,7 +12,7 @@ from .singleton import singleton
 @dataclass
 class PresenceSnapshot:
     """
-    Canonical record returned by `/who`
+    Canonical record returned by `/who`.
 
     Attributes
     ----------
@@ -149,7 +150,6 @@ class FacePresenceProvider:
         min_obs_window : int, default 24
             Minimum observation window.
         """
-
         self.base_url = base_url.rstrip("/")
         self.recent_sec = float(recent_sec)
         self.period = 1.0 / max(1e-6, float(fps))
@@ -199,7 +199,7 @@ class FacePresenceProvider:
                 pass
 
     def start(self) -> None:
-        """Start the background polling thread"""
+        """Start the background polling thread."""
         if self._thread and self._thread.is_alive():
             return
         self._stop.clear()
@@ -209,7 +209,7 @@ class FacePresenceProvider:
         self._thread.start()
 
     def stop(self, *, wait: bool = False) -> None:
-        """Request the background thread to strop"""
+        """Request the background thread to stop."""
         self._stop.set()
         if wait and self._thread:
             self._thread.join(timeout=3.0)
@@ -233,8 +233,8 @@ class FacePresenceProvider:
                 snap = self._fetch_snapshot()
                 text = snap.to_text()
                 self._emit(text)
-            except Exception:
-                pass
+            except Exception as e:
+                logging.warning(f"Failed to fetch/emit face presence snapshot: {e}")
 
             next_t += self.period
             if next_t < time.time() - self.period:
@@ -254,8 +254,8 @@ class FacePresenceProvider:
         for cb in callbacks:
             try:
                 cb(text)
-            except Exception:
-                pass
+            except Exception as e:
+                logging.warning(f"Face presence callback failed: {e}")
 
     def _fetch_snapshot(self, recent_sec: Optional[float] = None) -> PresenceSnapshot:
         """
@@ -272,6 +272,7 @@ class FacePresenceProvider:
         ----------
         recent_sec : Optional[float]
             Lookback window in seconds (overrides self.recent_sec if given).
+
         Returns
         -------
         PresenceSnapshot
