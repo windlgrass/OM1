@@ -16,7 +16,19 @@ class AMCLLocalizationInput(FuserInput[SensorConfig, Optional[str]]):
     Monitors the robot's localization status via AMCL and provides
     clear feedback to the LLM about whether navigation is safe to proceed.
     """
-
+    
+    Attributes
+    ----------
+    amcl_provider : UnitreeGo2AMCLProvider
+        AMCL provider instance.
+    io_provider : IOProvider
+        IO provider instance.
+    messages : List[Message]
+        Message buffer.
+    descriptor_for_LLM : str
+        Description for LLM context.
+    """
+            
     def __init__(self, config: SensorConfig):
         """
         Initialize the LocalizationInput plugin.
