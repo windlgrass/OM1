@@ -41,15 +41,15 @@ class D435Provider:
         """
         Calculate the angle and distance from the world coordinates.
 
-        Parameters:
-        -----------
+        Parameters
+        ----------
         world_x : float
             The x-coordinate in the world.
         world_y : float
             The y-coordinate in the world.
 
-        Returns:
-        --------
+        Returns
+        -------
         tuple
             A tuple containing the angle in degrees and the distance.
         """
@@ -64,7 +64,7 @@ class D435Provider:
         """
         Callback function to process the obstacle point cloud data.
 
-        Parameters:
+        Parameters
         ----------
         sample : zenoh.Sample
             The sample containing the point cloud data.
@@ -89,7 +89,6 @@ class D435Provider:
         """
         Start the D435 provider.
         """
-
         if self.running:
             logging.info("D435Provider is already running")
             return
