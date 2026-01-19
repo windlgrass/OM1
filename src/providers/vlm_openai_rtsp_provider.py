@@ -153,7 +153,7 @@ class VLMOpenAIRTSPProvider:
 
         Parameters
         ----------
-        callback : callable
+        message_callback: Optional[Callable]
             The callback function to process VLM results.
         """
         self.message_callback = message_callback
