@@ -45,6 +45,8 @@ class VLMOpenAIRTSPProvider:
             The RTSP URL for the video stream. Defaults to "rtsp://localhost:8554/top_camera".
         decode_format : str
             The decode format for the video stream. Defaults to "H264".
+        prompt : str
+            The prompt for the VLM analysis. Defaults to "What is the most interesting aspect in this series of images?".
         fps : int
             The fps for the VLM service connection.
         batch_size : int
