@@ -274,11 +274,6 @@ class OdomProvider:
     def process_odom(self):
         """
         Process the odom data and update the internal state.
-
-        Parameters
-        ----------
-        pose : PoseWithCovariance
-            The pose data containing position and orientation.
         """
         while not self._stop_event.is_set():
             try:
