@@ -36,6 +36,8 @@ class ASRProvider:
         ----------
         ws_url : str
             The websocket URL for the ASR service connection.
+        stream_url : str
+            The websocket URL for the stream service; used the system default if None
         device_id : int
             The device ID of the chosen microphone; used the system default if None
         microphone_name : str
