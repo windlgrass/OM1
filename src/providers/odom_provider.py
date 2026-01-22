@@ -171,7 +171,7 @@ class OdomProvider:
         use_zenoh: bool = False
             If true, get odom/pose data from Zenoh - typically used by TurtleBot
             Otherwise, use CycloneDDS
-        channel: str = ""
+        channel : str, optional
             The channel to connect to the robot, used for CycloneDDS (e.g., Unitree Go2).
             If not specified, it will raise an error when starting the provider.
         """
