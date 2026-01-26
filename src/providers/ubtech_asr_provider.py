@@ -38,7 +38,7 @@ class UbtechASRProvider:
         self.just_resumed = False  # Add new flag
         self._thread: Optional[threading.Thread] = None
         self._message_callback: Optional[Callable] = None
-        self._set_robot_language(language_code)
+        self._set_robot_language(self.language)
 
     def register_message_callback(self, cb: Optional[Callable]):
         """
