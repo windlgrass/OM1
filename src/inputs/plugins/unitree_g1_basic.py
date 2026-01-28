@@ -136,7 +136,7 @@ class UnitreeG1Basic(FuserInput[UnitreeG1BasicConfig, List[float]]):
         self.g1_lowbatt_percent = 20.0  # percent
         self.descriptor_for_LLM = "Energy Level"
 
-    def BMSStateHandler(self, msg: dds_.BmsState_):  # type: ignore
+    def BMSStateHandler(self, msg: BmsState_):  # type: ignore
         """
         Handle incoming BmsState messages from the Unitree robot.
 
@@ -153,7 +153,7 @@ class UnitreeG1Basic(FuserInput[UnitreeG1BasicConfig, List[float]]):
         self.battery_percentage = float(msg.soc)  # type: ignore
         self.battery_temperature = float(msg.temperature[0])  # type: ignore
 
-    def LowStateHandler(self, msg: dds_.LowState_):  # type: ignore
+    def LowStateHandler(self, msg: LowState_):  # type: ignore
         """
         Handle incoming LowState messages from the Unitree robot.
 
