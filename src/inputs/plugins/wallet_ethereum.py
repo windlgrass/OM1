@@ -27,15 +27,7 @@ class WalletEthereum(FuserInput[SensorConfig, List[float]]):
 
     def __init__(self, config: SensorConfig):
         """
-        Initialize the WalletEthereum input handler.
-
-        Sets up the required providers and buffers for handling Ethereum wallet data.
-        Fetches the initial wallet balance.
-
-        Parameters
-        ----------
-        config : SensorConfig
-            Configuration for the sensor input.
+        Initialize WalletEthereum instance.
         """
         super().__init__(config)
 
