@@ -75,7 +75,7 @@ class ZenohListener(FuserInput[ZenohListenerConfig, Optional[str]]):
 
         Parameters
         ----------
-        zenoh_input : object
+        zenoh_input : zenoh.Sample
             The Zenoh sample received, which should have a 'payload' attribute.
         """
         try:
